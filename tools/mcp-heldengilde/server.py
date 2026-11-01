@@ -22,7 +22,7 @@ CONTENT_ROOT = Path(os.environ.get("HG_CONTENT_ROOT", ".")).resolve()
 INFRA_ROOT = Path(os.environ.get("HG_INFRA_ROOT", CONTENT_ROOT.parent / "heldengilde-minecraft-infra")).resolve()
 TTRPG_DOCS_DIR = CONTENT_ROOT / "docs" / "ttrpg-source"
 SOURCE_SUFFIXES = {".md", ".txt", ".yml", ".yaml", ".json"}
-CRUCIBLE_TRIGGERS = re.compile(r"~on(Use|Swing|Crouch)\b")
+ITEM_TRIGGERS = re.compile(r"~on(Use|Swing|Crouch)\b")
 
 
 @mcp.tool()
@@ -86,7 +86,7 @@ def list_ingame_npcs_and_dungeons() -> str:
 @mcp.tool()
 def validate_content() -> str:
     """
-    Run yamllint on BetonQuest/ and MythicMobs/ and flag MythicCrucible-only triggers
+    Run yamllint on BetonQuest/ and MythicMobs/ and flag item trigger syntax
     (~onUse, ~onSwing, ~onCrouch) in MythicMobs/Items/ (not allowed, see ADR 0008).
     """
     report = []
@@ -102,9 +102,9 @@ def validate_content() -> str:
     items_dir = CONTENT_ROOT / "MythicMobs" / "Items"
     for path in sorted(items_dir.rglob("*.yml")) if items_dir.exists() else []:
         for idx, line in enumerate(path.read_text(encoding="utf-8", errors="ignore").splitlines(), start=1):
-            if CRUCIBLE_TRIGGERS.search(line):
-                hits.append(f"{path.relative_to(CONTENT_ROOT)}:{idx}: Crucible trigger: {line.strip()}")
-    report.append("Crucible triggers: " + ("\n" + "\n".join(hits) if hits else "none"))
+            if ITEM_TRIGGERS.search(line):
+                hits.append(f"{path.relative_to(CONTENT_ROOT)}:{idx}: item trigger: {line.strip()}")
+    report.append("Item triggers: " + ("\n" + "\n".join(hits) if hits else "none"))
     return "\n".join(report)
 
 

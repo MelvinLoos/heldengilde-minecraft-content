@@ -39,9 +39,9 @@ These are deployed by the host agent with `rsync --delete`; a file removed here 
 
 **Never touch `server-owned/`** (Citizens `saves.yml`, MythicDungeons `maps/<dungeon>/*.yml`, `loottables/`). The server writes it and an automatic PR snapshots it. Only read it, unless explicitly asked to wire a dungeon trigger.
 
-## 5. Spell items (no MythicCrucible, ADR 0008)
+## 5. Spell items (ADR 0008)
 
-MythicCrucible is **not** installed. Do not use `~onUse`, `~onSwing`, `~onCrouch` or a `Skills:` block on items. The `HeldengildeParty` plugin (planned) reads tags from the item on right-click, checks and consumes mana through AuraSkills, applies safety rules (for example no casting in the Quiet Corner), and casts the skill through the MythicMobs API.
+No item-trigger plugin is installed. Do not use `~onUse`, `~onSwing`, `~onCrouch` or a `Skills:` block on items. The `HeldengildeParty` plugin (planned) reads tags from the item on right-click, checks and consumes mana through AuraSkills, applies safety rules (for example no casting in the Quiet Corner), and casts the skill through the MythicMobs API.
 
 For every spell create two things:
 
