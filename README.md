@@ -9,7 +9,7 @@ Game content for the Heldengilde Minecraft server (Paper 26.2). Infrastructure l
 | `server-owned/` | Server (auto-PR from branch `autosync/server`) | read-only here |
 | `docs/ttrpg-source/` | Git | input for the AI tools |
 
-`hg-gitops deploy-content` on the host pulls `main`, mirrors the Git-owned directories with `rsync --delete`, then runs `q reload` and `mm reload`.
+`hg-gitops deploy-content` on the host pulls `main`, mirrors the Git-owned directories with `rsync --delete`, then runs `bq reload` and `mm reload`.
 
 ## AI tooling
 
