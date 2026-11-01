@@ -1,0 +1,9 @@
+# Starter package for BetonQuest 3.2: Gilde-Meester Brenn hands out the three starter spells.
+npcs:
+  brenn: "citizens Brenn byName"
+npc_conversations:
+  brenn: Brenn
+actions:
+  startBrenn: "conversation Brenn"
+  geefStarterSpreuken: "command mm items give %player% Spell_Vuurvonk|mm items give %player% Spell_HelendBaken|mm items give %player% Spell_Runenpuls"
+  meldSpreuken: "notify Je hebt de drie starterspreuken gekregen. Houd er één vast en klik met de rechtermuisknop. io:chat"

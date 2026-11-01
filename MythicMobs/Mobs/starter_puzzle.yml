@@ -1,0 +1,19 @@
+Hg_RunicCrystal:
+  Type: ARMOR_STAND
+  Display: '&dOude Runensteen'
+  Health: 20
+  Options:
+    Invincible: true
+    Silent: true
+    NoAI: true
+    NoGravity: true
+    PreventOtherDrops: true
+    Despawn: false
+    Persistent: true
+  DamageModifiers:
+    - ALL 0
+  Equipment:
+    - AMETHYST_BLOCK HEAD
+  Skills:
+    - skill:Hg_RunicCrystal_Ambient ~onTimer:20
+    - skill:Puzzle_RunicCrystal_Activate ~onSignal:RUNEN_ACTIVEER

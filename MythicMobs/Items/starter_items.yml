@@ -1,0 +1,45 @@
+# Starter spell items (ADR 0008). HeldengildeParty reads the NBT tags on right-click.
+Spell_Vuurvonk:
+  Id: ENCHANTED_BOOK
+  Display: '&6Boek der Vuurvonk'
+  Lore:
+    - '&7Rol: Beschermer of Puzzelaar'
+    - '&7Kosten: 8 mana'
+    - '&7Afkoeltijd: 3 seconden'
+    - '&7Effect: schiet een vuurvonk tot 12 blokken ver.'
+    - '&7Doet 6 schade en wekt de Oude Runensteen.'
+    - '&eRechtsklik om te gebruiken.'
+  NBT:
+    HgSpell: Spell_Vuurvonk_Skill
+    HgManaCost: 8
+    HgCooldown: 3
+
+Spell_HelendBaken:
+  Id: BLAZE_ROD
+  Display: '&aStaf van het Helend Baken'
+  Lore:
+    - '&7Rol: Ondersteuner'
+    - '&7Kosten: 15 mana'
+    - '&7Afkoeltijd: 8 seconden'
+    - '&7Effect: geneest jou en spelers binnen 5 blokken.'
+    - '&7Geeft 6 levenspunten en even extra herstel.'
+    - '&eRechtsklik om te gebruiken.'
+  NBT:
+    HgSpell: Spell_HelendBaken_Skill
+    HgManaCost: 15
+    HgCooldown: 8
+
+Spell_Runenpuls:
+  Id: RECOVERY_COMPASS
+  Display: '&dKompas van de Runenpuls'
+  Lore:
+    - '&7Rol: Verkenner of Puzzelaar'
+    - '&7Kosten: 5 mana'
+    - '&7Afkoeltijd: 5 seconden'
+    - '&7Effect: laat levende wezens binnen 15 blokken gloeien'
+    - '&7en wekt Runenstenen binnen 15 blokken.'
+    - '&eRechtsklik om te gebruiken.'
+  NBT:
+    HgSpell: Spell_Runenpuls_Skill
+    HgManaCost: 5
+    HgCooldown: 5
