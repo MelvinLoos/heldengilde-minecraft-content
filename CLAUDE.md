@@ -37,11 +37,13 @@ Read the source documents in `docs/ttrpg-source/` for classes and archetypes, th
 
 These are deployed by the host agent with `rsync --delete`; a file removed here disappears from the server.
 
-**Never touch `server-owned/`** (Citizens `saves.yml`, MythicDungeons `maps/<dungeon>/*.yml`, `loottables/`). The server writes it and an automatic PR snapshots it. Only read it, unless explicitly asked to wire a dungeon trigger.
+**Never touch `server-owned/`** (Citizens `saves.yml`, MythicDungeons `maps/<dungeon>/*.yml`, `loottables/`, `HeldengildeParty/waystones.yml` with the DM-created waystones and their unlock state). The server writes it and an automatic PR snapshots it. Only read it, unless explicitly asked to wire a dungeon trigger.
 
-## 5. Spell items (ADR 0008)
+## 5. Spell items (ADR 0008) — verified
 
-No item-trigger plugin is installed. Do not use `~onUse`, `~onSwing`, `~onCrouch` or a `Skills:` block on items. The `HeldengildeParty` plugin (planned) reads tags from the item on right-click, checks and consumes mana through AuraSkills, applies safety rules (for example no casting in the Quiet Corner), and casts the skill through the MythicMobs API.
+Verified against `HeldengildeParty 0.1.0` and MythicMobs 5.14.0 on Paper 26.2.
+
+No item-trigger plugin is installed. Do not use `~onUse`, `~onSwing`, `~onCrouch` or a `Skills:` block on items. The `HeldengildeParty` plugin reads tags from the item on right-click, checks and consumes mana through AuraSkills, applies safety rules (for example no casting in the Quiet Corner), and casts the skill through the MythicMobs API.
 
 For every spell create two things:
 
@@ -61,7 +63,7 @@ Spell_Voorbeeld:  # replace with the item ID
     HgCooldown: 5                    # optional, seconds
 ```
 
-This contract is **provisional** until `HeldengildeParty` exists; the exact way MythicMobs stores `NBT:` in the item must be verified then. Lore must always state the mana cost and effect.
+How it works (verified): MythicMobs writes the `NBT:` keys at the root of the item's `minecraft:custom_data` component (not in `PublicBukkitValues`). Plain values are stored as strings, so `HgManaCost: 10` and the typed form `HgManaCost: int/10` are both read correctly (decimals like `7.5` work too). `HgSpell` is required; a missing `HgManaCost` means free, a missing `HgCooldown` uses the server default (1 second). A malformed number makes the plugin ignore the item and log a warning. A DM can check the tags of a held item with `/heldengilde item`. Lore must always state the mana cost and effect.
 
 ## 6. Integration patterns (MythicMobs, BetonQuest, MythicDungeons)
 
