@@ -1,0 +1,44 @@
+# Starter spells. Spells wake the crystal with a signal; the crystal runs the puzzle skill itself.
+Spell_Vuurvonk_Skill:
+  Skills:
+    - projectile{onTick=Spell_Vuurvonk_Tick;onHit=Spell_Vuurvonk_Hit;onEnd=Spell_Vuurvonk_End;md=12;v=12;i=1;hp=false;hnp=true} @Forward{f=1}
+
+Spell_Vuurvonk_Tick:
+  Skills:
+    - effect:particles{p=flame;a=6;hs=0.1;vs=0.1;s=0.02} @origin
+
+Spell_Vuurvonk_Hit:
+  Skills:
+    - damage{a=6;ignorearmor=false} @target
+    - effect:particles{p=lava;a=10;hs=0.3;vs=0.3} @origin
+    - signal{s=RUNEN_ACTIVEER} @MobsNearOrigin{types=Hg_RunicCrystal;r=2.5}
+
+Spell_Vuurvonk_End:
+  Skills:
+    - signal{s=RUNEN_ACTIVEER} @MobsNearOrigin{types=Hg_RunicCrystal;r=2.5}
+
+Spell_HelendBaken_Skill:
+  Skills:
+    - sound{s=block.amethyst_block.chime;v=1;p=1.2} @self
+    - effect:particlering{p=happy_villager;a=40;r=5;points=40;y=0.3} @self
+    - heal{amount=6} @self
+    - potion{type=REGENERATION;duration=60;level=0} @self
+    - heal{amount=6} @PlayersInRadius{r=5;ignoreself=true}
+    - potion{type=REGENERATION;duration=60;level=0} @PlayersInRadius{r=5;ignoreself=true}
+
+Spell_Runenpuls_Skill:
+  Skills:
+    - sound{s=block.amethyst_block.chime;v=1;p=1} @self
+    - effect:particlering{p=end_rod;a=60;r=15;points=60;y=0.5} @self
+    - potion{type=GLOWING;duration=200;level=0} @LivingEntitiesInRadius{r=15}
+    - signal{s=RUNEN_ACTIVEER} @MobsInRadius{types=Hg_RunicCrystal;r=15}
+
+Puzzle_RunicCrystal_Activate:
+  Skills:
+    - sound{s=block.amethyst_cluster.break;v=1;p=1} @self
+    - effect:particles{p=enchant;a=60;hs=0.6;vs=0.8;s=0.5} @self
+    - message{m="&d[Oude Runensteen] &fDe Oude Runensteen gloeit op! Goed gedaan, jullie hebben hem gewekt."} @PlayersInRadius{r=12}
+
+Hg_RunicCrystal_Ambient:
+  Skills:
+    - effect:particles{p=enchant;a=8;hs=0.4;vs=0.6;s=0.3} @self

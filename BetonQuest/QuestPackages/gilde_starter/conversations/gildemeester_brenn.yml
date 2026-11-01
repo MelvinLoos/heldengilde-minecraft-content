@@ -1,0 +1,33 @@
+conversations:
+  Brenn:
+    quester: "Gilde-Meester Brenn"
+    first: begroeting
+    NPC_options:
+      begroeting:
+        text: "&a[Vriendelijk] &fWelkom, %player%! Jouw rol is: %ph.heldengilde_rol%. Heb je nog geen rol? Kies die met het Avonturenbord. Ik help je met je eerste spreuken. Wat wil je doen?"
+        pointers: kiesSpreuken,kiesUitleg,kiesTotZiens
+      spreukenGegeven:
+        text: "&a[Vriendelijk] &fBesteld! Je hebt drie spreuken gekregen. Kwijt? Vraag het me gewoon opnieuw, dat mag altijd."
+        actions: geefStarterSpreuken,meldSpreuken
+        pointers: kiesUitleg,kiesTotZiens
+      uitleg:
+        text: "&e[Uitleg] &fJe hebt drie spreuken. Boek der Vuurvonk: 8 mana, schiet een vuurvonk. Staf van het Helend Baken: 15 mana, geneest jou en spelers binnen 5 blokken. Kompas van de Runenpuls: 5 mana, laat wezens gloeien en wekt Runenstenen. Houd een voorwerp vast en klik met de rechtermuisknop."
+        pointers: kiesPuzzel,kiesSpreuken,kiesTotZiens
+      puzzel:
+        text: "&e[Uitleg] &fJullie doel: zoek de Oude Runensteen en laat hem oplichten. Gebruik het Kompas van de Runenpuls of het Boek der Vuurvonk. Werk samen: de een zoekt, de ander schiet. Lukt het niet? Probeer het gewoon opnieuw, er gaat niets verloren."
+        pointers: kiesSpreuken,kiesTotZiens
+      totziens:
+        text: "&a[Vriendelijk] &fTot ziens, %player%! Succes met jullie avontuur. Kom terug wanneer je wilt."
+    player_options:
+      kiesSpreuken:
+        text: "Ik wil mijn drie starterspreuken."
+        pointers: spreukenGegeven
+      kiesUitleg:
+        text: "Leg de spreuken uit."
+        pointers: uitleg
+      kiesPuzzel:
+        text: "Wat moeten we met de Oude Runensteen doen?"
+        pointers: puzzel
+      kiesTotZiens:
+        text: "Tot ziens."
+        pointers: totziens
