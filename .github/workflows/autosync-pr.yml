@@ -1,0 +1,27 @@
+name: autosync-pr
+
+# hg-gitops pushes branch autosync/server (main + one snapshot commit of server-owned files).
+# This opens or refreshes the PR into main. It only touches server-owned/.
+on:
+  push:
+    branches: [autosync/server]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Open PR if none exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if [ -z "$(gh pr list --head autosync/server --base main --state open --json number --jq '.[0].number')" ]; then
+            gh pr create --head autosync/server --base main \
+              --title "chore(autosync): snapshot of server-owned content" \
+              --body "Automatic snapshot of Citizens and MythicDungeons YAML from the server (ADR 0003). Review the diff before merging."
+          fi

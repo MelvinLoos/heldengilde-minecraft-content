@@ -1,0 +1,37 @@
+name: validate
+
+# CI only validates; it never deploys (ADR 0003 in heldengilde-minecraft-infra). Actions are pinned to commit SHAs.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: yamllint
+        run: |
+          pipx install yamllint==1.38.0
+          yamllint -c .yamllint .
+      - name: No jars tracked
+        run: test -z "$(git ls-files '*.jar')"
+      - name: JSON files are valid
+        run: jq empty .mcp.json
+
+  secrets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks (full history)
+        run: |
+          docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.21.2 \
+            detect --source /repo --redact --verbose

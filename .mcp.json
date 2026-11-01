@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "heldengilde-ttrpg": {
+      "command": "uv",
+      "args": ["run", "--script", "tools/mcp-heldengilde/server.py"],
+      "env": {
+        "HG_CONTENT_ROOT": "."
+      }
+    }
+  }
+}
