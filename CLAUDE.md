@@ -67,5 +67,6 @@ How it works (verified): MythicMobs writes the `NBT:` keys at the root of the it
 
 ## 6. Integration patterns (MythicMobs, BetonQuest, MythicDungeons)
 
+- **Never use `ARMOR_STAND` for a mob that must receive signals.** MythicMobs radius targeters (`@MobsInRadius`, `@MobsNearOrigin`, `@EntitiesInRadius`) and `signal{}` never reach armor stands (verified on 5.14). Use a frozen `ZOMBIE` with `NoAI`, `Invincible`, an `INVISIBILITY` potion on `~onSpawn` and the visual as `Equipment` (see `Hg_RunicCrystal`). `@MobsInRadius` also requires `types=`.
 - **Spell on a puzzle object:** make an invisible or disguised MythicMob (for example `RunicCrystal`) with `DamageModifiers: [ ALL 0 ]` and a `~onDamaged` or aura check that listens for a specific spell tag, then signals MythicDungeons with the MythicMobs mechanic `dungeonsignal{s=<signal>}` (a Signal Receiver trigger in the dungeon reacts to it). `dungeoncomplete{leave=true}` finishes a dungeon directly. There is no `md trigger` command in MythicDungeons 2.1.0.
 - **BetonQuest starts a dungeon:** use a command event (or the native integration) to send a party of at most 6 into a MythicDungeons instance once the dialogue puzzle with the guard is solved.
