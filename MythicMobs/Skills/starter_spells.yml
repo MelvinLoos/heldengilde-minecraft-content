@@ -38,6 +38,7 @@ Puzzle_RunicCrystal_Activate:
     - sound{s=block.amethyst_cluster.break;v=1;p=1} @self
     - effect:particles{p=enchant;a=60;hs=0.6;vs=0.8;s=0.5} @self
     - message{m="&d[Oude Runensteen] &fDe Oude Runensteen gloeit op! Goed gedaan, jullie hebben hem gewekt."} @PlayersInRadius{r=12}
+    - dungeonsignal{s=runensteen_gewekt;r=30} @self
 
 Hg_RunicCrystal_Ambient:
   Skills:
