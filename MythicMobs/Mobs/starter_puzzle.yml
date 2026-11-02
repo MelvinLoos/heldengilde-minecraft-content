@@ -1,5 +1,8 @@
+# Type ZOMBIE on purpose: MythicMobs radius targeters (@MobsInRadius, @MobsNearOrigin) and the signal
+# mechanic never reach ARMOR_STAND mobs, so spells could not wake an armor-stand crystal. The mob is
+# invisible and frozen; only the amethyst head remains visible.
 Hg_RunicCrystal:
-  Type: ARMOR_STAND
+  Type: ZOMBIE
   Display: '&dOude Runensteen'
   Health: 20
   Options:
@@ -15,5 +18,6 @@ Hg_RunicCrystal:
   Equipment:
     - AMETHYST_BLOCK HEAD
   Skills:
+    - potion{type=INVISIBILITY;duration=1000000;level=0;force=true} @self ~onSpawn
     - skill:Hg_RunicCrystal_Ambient ~onTimer:20
     - skill:Puzzle_RunicCrystal_Activate ~onSignal:RUNEN_ACTIVEER
